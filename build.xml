@@ -8,7 +8,7 @@
     </tstamp>
 
     <target name="init"
-            depends="phpunit, cache, run_migrations, ensure_permissions"/>
+            depends="phpunit, cache, ensure_permissions"/>
 
     <target name="cache" depends="cache_clear, cache_warmup"/>
 
