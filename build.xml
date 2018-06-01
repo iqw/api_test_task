@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="api_test_task" basedir="." default="init">
+    <property name="source" value="${project.basedir}/src"/>
+
+    <tstamp>
+        <format property="DATE" pattern="%c"/>
+    </tstamp>
+
+    <target name="init"
+            depends="phpunit, cache, run_migrations, ensure_permissions"/>
+
+    <target name="cache" depends="cache_clear, cache_warmup"/>
+
+    <target name="cache_clear">
+        <exec executable="php" logoutput="true">
+            <arg value="bin/console"/>
+            <arg value="cache:clear"/>
+            <arg value="--env=prod"/>
+        </exec>
+    </target>
+
+    <target name="cache_warmup">
+        <exec executable="php" logoutput="true">
+            <arg value="bin/console"/>
+            <arg value="cache:warmup"/>
+            <arg value="--env=prod"/>
+        </exec>
+    </target>
+
+    <target name="ensure_permissions">
+        <exec command="chmod -R 0777 ${project.basedir}/var/cache" escape="false"/>
+        <exec command="chmod -R 0777 ${project.basedir}/var/logs" escape="false"/>
+        <exec command="chmod -R 0777 ${project.basedir}/var/sessions" escape="false"/>
+    </target>
+
+    <target name="phpunit">
+        <exec logoutput="true" checkreturn="true"
+              command="(export SYMFONY_DEPRECATIONS_HELPER=weak &amp;&amp; vendor/bin/phpunit --configuration=phpunit.xml.dist)"/>
+    </target>
+
+    <target name="run_migrations">
+        <exec executable="php" logoutput="true" checkreturn="true">
+            <arg value="bin/console"/>
+            <arg value="doctrine:migrations:migrate"/>
+            <arg value="-n"/>
+            <arg value="--env=prod"/>
+        </exec>
+    </target>
+</project>

@@ -1,0 +1,38 @@
+version: '2'
+services:
+    db:
+        container_name: api_test_task_mysql
+        image: mariadb
+        ports:
+            - "3305:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: test
+            MYSQL_DATABASE: test_task
+            MYSQL_USER: test_task
+            MYSQL_PASSWORD: test
+        volumes:
+          - ./docker/db/data:/var/lib/mysql
+    php:
+        container_name: api_test_task_php
+        build: ./docker/php-fpm
+        ports:
+            - "9001:9000"
+        volumes:
+            - .:/var/www/symfony:cached
+        links:
+            - db
+            - redis
+    nginx:
+        container_name: api_test_task_nginx
+        build: ./docker/nginx
+        ports:
+            - "88:80"
+        links:
+            - php
+        volumes_from:
+            - php
+    redis:
+        container_name: api_test_task_redis
+        image: redis
+        ports:
+          - "6380:6379"

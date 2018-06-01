@@ -1,0 +1,11 @@
+.idea
+vendor
+app/config/parameters.yml
+docker/db
+
+var/cache/*
+!var/cache/.gitkeep
+var/logs/*
+!var/logs/.gitkeep
+var/sessions/*
+!var/sessions/.gitkeep
