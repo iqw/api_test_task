@@ -21,24 +21,40 @@ abstract class AbstractManager
 
     /**
      * @param $entity
+     * @return bool
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function create($entity)
+    public function create($entity): bool
     {
+        //TODO Rewrite on php7.2 (object type hinting)
+        if (!is_object($entity)) {
+            return false;
+        }
+
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
+
+        return true;
     }
 
     /**
      * @param $entity
+     * @return bool
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove($entity)
+    public function remove($entity): bool
     {
+        //TODO Rewrite on php7.2 (object type hinting)
+        if (!is_object($entity)) {
+            return false;
+        }
+
         $this->entityManager->remove($entity);
         $this->entityManager->flush();
+
+        return true;
     }
 
     abstract public function getRepository(): EntityRepository;
