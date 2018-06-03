@@ -7,7 +7,7 @@
         <format property="DATE" pattern="%c"/>
     </tstamp>
 
-    <target name="init" depends="tests, cache, schema, permissions"/>
+    <target name="init" depends="schema, cache, permissions, tests"/>
 
     <target name="tests" depends="phpunit"/>
     <target name="cache" depends="cache_clear, cache_warmup"/>
