@@ -34,7 +34,7 @@ class PostManagerTest extends TestCase
                 if ($fail) {
                     return $this->createMock(EntityRepository::class);
                 }
-
+                
                 return $this->createMock(PostRepository::class);
             }));
 

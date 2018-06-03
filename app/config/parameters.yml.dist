@@ -17,3 +17,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: "BF9wjy-A`PW2NKj=}8U*+9)h5&h[dFnj"
+
+    http_cache_ttl: 300
+    result_cache_ttl: 300

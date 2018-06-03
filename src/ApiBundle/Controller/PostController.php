@@ -32,7 +32,11 @@ class PostController extends FOSRestController implements ClassResourceInterface
     {
         $categoryQueryBuilder = $this->getManager()
             ->getRepository()
-            ->getQueryBuilder();
+            ->getQueryBuilder()
+            ->getQuery()
+            ->useQueryCache(true)
+            ->useResultCache(true)
+            ->setResultCacheLifetime($this->getParameter('result_cache_ttl'));
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate($categoryQueryBuilder, (int)$request->get('page', 1), self::RECORDS_PER_PAGE);
@@ -42,7 +46,7 @@ class PostController extends FOSRestController implements ClassResourceInterface
         $view->getContext()->addGroup('post_list');
         $view->getContext()->addGroup('pagination');
 
-        return $this->handleView($view);
+        return $this->handleView($view)->setMaxAge($this->getParameter('http_cache_ttl'));
     }
 
     /**
@@ -105,7 +109,7 @@ class PostController extends FOSRestController implements ClassResourceInterface
     protected function createPost(Request $request, Post $post = null, $clearMissing = false)
     {
         $form = $this->createForm(PostType::class, $post);
-        $form->submit($request->request->get($form->getName()), $clearMissing);
+        $form->submit($request->request->all(), $clearMissing);
 
         if (!$form->isValid()) {
             $errors = $this->extractAllErrors($form);

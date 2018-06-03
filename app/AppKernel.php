@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             //Doctrine
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
 
             //Misc
             new FOS\RestBundle\FOSRestBundle(),

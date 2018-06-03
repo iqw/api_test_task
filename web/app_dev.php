@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 // for more information
 //umask(0000);
 
+exit;
 
 require __DIR__ . '/../vendor/autoload.php';
 Debug::enable();

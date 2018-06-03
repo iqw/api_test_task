@@ -36,7 +36,7 @@ class CategoryController extends FOSRestController implements ClassResourceInter
         $view->getContext()->addGroup('category_list');
         $view->getContext()->addGroup('pagination');
 
-        return $this->handleView($view);
+        return $this->handleView($view)->setMaxAge($this->getParameter('http_cache_ttl'));
     }
 
     /**

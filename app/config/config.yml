@@ -57,10 +57,28 @@ doctrine:
         #   3. Uncomment next line:
         #path: '%database_path%'
 
+
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        default_entity_manager: default
+        entity_managers:
+            default:
+                query_cache_driver:
+                    type: predis
+                    host: redis
+                metadata_cache_driver:
+                    type: predis
+                    host: redis
+                result_cache_driver:
+                    type: predis
+                    host: redis
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                auto_mapping: true
+
+doctrine_cache:
+    providers:
+        predis:
+            type: predis
 
 # Swiftmailer Configuration
 swiftmailer:
