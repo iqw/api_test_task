@@ -1,0 +1,16 @@
+AppBundle\Entity\Post:
+    properties:
+        title: #Post title should not be empty
+            - NotBlank: ~
+        content: #Post content also should not be empty
+            - NotBlank: ~
+        category: #Category is mandatory and must be validated, when created through Post entity
+            - NotNull: ~
+            - Valid: ~
+
+AppBundle\Entity\Category:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: title #Category is unique by its title
+    properties:
+        title: #Category title should not be empty
+            - NotBlank: ~

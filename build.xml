@@ -7,10 +7,12 @@
         <format property="DATE" pattern="%c"/>
     </tstamp>
 
-    <target name="init"
-            depends="phpunit, cache, ensure_permissions"/>
+    <target name="init" depends="tests, cache, schema, permissions"/>
 
+    <target name="tests" depends="phpunit"/>
     <target name="cache" depends="cache_clear, cache_warmup"/>
+    <target name="schema" depends="run_migrations"/>
+    <target name="permissions" depends="ensure_permissions"/>
 
     <target name="cache_clear">
         <exec executable="php" logoutput="true">

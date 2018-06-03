@@ -1,0 +1,7 @@
+post:
+    type: rest
+    resource: ApiBundle\Controller\PostController
+
+category:
+    type: rest
+    resource: ApiBundle\Controller\CategoryController
