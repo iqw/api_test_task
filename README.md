@@ -37,6 +37,6 @@
 - `cp app/config/parameters.yml.dist app/config/parameters.yml` to copy config sample (edit parameters.yml after that)
 - `composer install` to install composer dependencies
 - `php vendor/bin/phing init` to build symfony project (cache, permissions, migrations)
-- `php bin/console server:run` to run project at `http://localhost:8080/` 
+- `php bin/console server:run` to run project at `http://localhost:8000/` 
 
 ## This environment IS NOT production-ready, just for test task fast run
