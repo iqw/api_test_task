@@ -1,4 +1,4 @@
-#Задание 
+# Задание 
 
 Нужно сделать API новостного сайта для управления категориями, статьями
 
@@ -14,7 +14,7 @@
 Также будет плюсом написание UNIT-теста(ов).
 
 
-#Installation
+# Installation
 ## Docker + Docker compose
 ### Linux and OSX `make` installed
 - `git clone git@github.com:iqw/api_test_task.git` to clone the repo
